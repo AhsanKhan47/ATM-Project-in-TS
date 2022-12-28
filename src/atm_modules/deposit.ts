@@ -14,6 +14,7 @@ async function OtherAmount(balance: number) {
     ])
     if (otherAmt.otherAmmount < balance) {
         balance += otherAmt.otherAmmount;
+        console.log(`${otherAmt.otherAmmount} deposited successfully`)
     }
     else {
         console.log(`Insufficient Balance please recharge your account \n Current balance : ${balance}`)
@@ -80,7 +81,6 @@ async function cashDeposit(balance: number) {
             }
         case "Other Amount":
             balance = await OtherAmount(balance)
-            console.log(`Your balance is : ${balance}`)
             break;
     }
     return balance;

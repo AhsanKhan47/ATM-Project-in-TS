@@ -1,5 +1,7 @@
 import inquirer from "inquirer";
 import cashDeposit from "./deposit.js";
+import cashTransfer from "./transfer.js";
+import utilityB from "./utilityBills.js";
 import cashWithDraw from "./withdraw.js";
 // Continue function 
 async function contOrNo() {
@@ -30,22 +32,29 @@ async function menuScreen(balance) {
                 break;
             case "Cash Deposit":
                 balance = await cashDeposit(balance);
+                console.log(`Your new Balance is : ${balance}`);
                 break;
             case "Cash Withdrawl":
                 balance = await cashWithDraw(balance);
-                console.log("Withdrawl");
+                console.log(`Cash withdrawed successfully! Your new Balance is : ${balance}`);
                 break;
             case "Transfer":
-                console.log("Transfer");
+                balance = await cashTransfer(balance);
+                console.log(`Cash transfer successfully! Your new Balance is : ${balance}`);
                 break;
             case "Utility Bill":
-                console.log("Bill");
+                balance = await utilityB(balance);
                 break;
             case "Exit":
-                console.log("Exit");
+                otherTransaction = "No";
                 break;
         }
-        var otherTransaction = await contOrNo();
+        if (option.menu != "Exit") {
+            var otherTransaction = await contOrNo();
+        }
+        if (otherTransaction == "No") {
+            console.log("Thank you for using our service");
+        }
     } while (otherTransaction != "No");
 }
 export default menuScreen;

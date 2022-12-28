@@ -26,9 +26,23 @@ async function login() {
     }
     else {
         console.log("You entered invalid pin or Acc number")
+
+
+        //try again prompt if user want to try again login
+        const tryAgain = await inquirer.prompt([
+            {
+                name: "try",
+                type:"list",
+                choices:["Yes","No"],
+                message:"Try again?"
+            }
+        ])
+        if(tryAgain.try != "No"){
+        login()
+        }
+      
     }
 
 
 }
-// export const str = user;
 export default login;
